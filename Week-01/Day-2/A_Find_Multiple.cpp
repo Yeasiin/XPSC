@@ -7,15 +7,20 @@ int main()
     int a, b, c;
     cin >> a >> b >> c;
 
-    int sum = c * 2;
-    if (sum > a && sum < b)
+    bool flag = false;
+    for (int i = 1; i <= c; i++)
     {
-        cout << sum << endl;
+        int mult = c * i;
+        if (mult >= a && mult <= b)
+        {
+            cout << mult << endl;
+            flag = true;
+            break;
+        }
     }
-    else
-    {
-        cout << -1 << endl;
-    }
+
+    if (!flag)
+        cout << -1;
 
     return 0;
 }
