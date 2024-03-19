@@ -4,10 +4,11 @@ using namespace std;
 
 int main()
 {
-    int n;
+    long long n;
     cin >> n;
-    int arr[n];
+    long long int arr[n];
     long long int sum = 0;
+
     for (int i = 0; i < n; i++)
     {
         cin >> arr[i];
@@ -18,8 +19,21 @@ int main()
     {
         cout << sum << "\n";
     }
-    long long ii = 999999999 + 999999999 + 999999999 + 999999999;
-    cout << ii << "--";
+    else
+    {
+        sort(arr, arr + n);
+
+        for (int i = 0; i < n; i++)
+        {
+
+            long long tmp = sum - arr[i];
+            if (tmp % 2 == 0)
+            {
+                cout << tmp << "\n";
+                break;
+            }
+        }
+    }
 
     return 0;
 }
