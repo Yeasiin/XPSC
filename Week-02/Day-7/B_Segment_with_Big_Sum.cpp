@@ -29,14 +29,15 @@ int main()
 
         if (sum >= s)
         {
-            // ans = min(ans, (r - l) + 1);
-            while (sum > s && l < r)
+            ans = min(ans, r - l + 1);
+
+            while (sum > s)
             {
                 sum -= arr[l];
                 l++;
-                if (sum > s)
+                if (sum >= s)
                 {
-                    ans = min(ans, (r - l) + 1);
+                    ans = min(ans, r - l + 1);
                 }
             }
         }
@@ -44,7 +45,7 @@ int main()
         r++;
     }
 
-    if (ans == 0)
+    if (ans == INT_MAX)
     {
         cout << -1;
     }
