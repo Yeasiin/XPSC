@@ -12,20 +12,33 @@ int main()
     while (t--)
     {
 
-        int numOfString;
-        cin >> numOfString;
+        int n;
+        cin >> n;
 
-        string str[numOfString];
+        string str[n];
+        map<string, bool> mp;
 
-        map<string, int> mp;
-
-        for (int i = 1; i <= numOfString; i++)
+        for (int i = 0; i < n; i++)
         {
             cin >> str[i];
-            mp[str[i]] = i;
+            mp[str[i]] = true;
         }
 
-        bool flag = true;
+        for (int i = 0; i < n; i++)
+        {
+            bool flag = false;
+            for (int j = 0; j < str[i].length(); j++)
+            {
+                string pre = str[i].substr(0, j);
+                string ere = str[i].substr(j, str[i].length() - j);
+
+                if (mp[pre] && mp[ere])
+                {
+                    flag = true;
+                }
+            }
+            cout << flag;
+        }
 
         cout << endl;
     }
