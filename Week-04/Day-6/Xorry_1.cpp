@@ -16,23 +16,12 @@ int main()
 
         int a = 0, b = 0;
 
-        int diff = INT_MAX;
+        int heightbit = 31 - __builtin_clz(x);
+        b = 1 << heightbit;
 
-        for (int i = x - 1; i >= 0; i--)
-        {
-            int calcB = (x ^ i);
-            if (calcB >= x)
-                continue;
+        a = x ^ b;
 
-            if ((i ^ calcB) == x)
-            {
-                a = i;
-                b = calcB;
-                break;
-            }
-        }
-
-         
+        cout << a << " " << b << "\n";
     }
     return 0;
 }
