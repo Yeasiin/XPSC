@@ -6,55 +6,60 @@ using ll = long long;
 
 int main()
 {
+
     int t;
     cin >> t;
 
     while (t--)
     {
 
-        int a, b;
-        cin >> a >> b;
+        int n, q;
+        cin >> n >> q;
 
-        int arrA[a];
-        int arrB[b];
+        vector<ll> a(n + 1, 0);
 
-        for (int i = 0; i < a; i++)
+        for (int i = 1; i <= n; i++)
         {
-            cin >> arrA[i];
+            cin >> a[i];
         }
 
-        for (int i = 0; i < b; i++)
+        vector<ll> pref(n + 2, 0);
+
+        for (int i = 1; i <= n; i++)
         {
-            cin >> arrB[i];
+            pref[i] = (pref[i - 1] + a[i]);
         }
 
-        vector<int> preSum(a);
-        vector<int> preMax(a);
-
-        preSum[0] = arrA[0];
-        preMax[0] = arrA[0];
-        for (int i = 1; i < a; i++)
+        vector<pair<ll, int>> b(q);
+        for (int i = 0; i < q; i++)
         {
-            preSum[i] = preSum[i - 1] + arrA[i];
-            preMax[i] = max(preMax[i - 1], arrA[i]);
+            cin >> b[i].first;
+            b[i].second = i;
         }
 
-        for (int i = 0; i < b; i++)
+        sort(b.begin(), b.end());
+
+        vector<ll> ans(q);
+
+        int ap = 0;
+        for (int i = 0; i < q; i++)
         {
-
-            int val = arrB[i];
-
-            auto ak = upper_bound(preMax.begin(), preMax.end(), val) - preMax.begin();
-
-            if (val == 0)
+            while (true)
             {
-                cout << 0 << endl;
+                if (ap == n || a[ap + 1] > b[i].first)
+                    break;
+                ap++;
             }
-            else
-            {
-                cout << ak << endl;
-            }
+
+            ans[b[i].second] = pref[ap];
         }
+
+        for (int i = 0; i < q; i++)
+        {
+            cout << ans[i] << " ";
+        }
+        cout << endl;
     }
+
     return 0;
 }
