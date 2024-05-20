@@ -6,41 +6,44 @@ using ll = long long;
 
 int main()
 {
-    int n, x, y;
+
+    ll n, x, y;
     cin >> n >> x >> y;
 
-    int l = 0, r = max(x, y) * n, mid;
+    ll mn = min(x, y);
 
-    auto ok = [&](int mid)
+    ll l = 0, r = max(x, y) * n, mid, ans = 0;
+
+    auto ok = [&](ll mid)
     {
-        if (mid < min(x, y))
+        if (mid < mn)
         {
             return false;
         }
+        mid -= mn;
 
-        int cnt = 1;
-        mid -= min(x, y);
+        ll cnt = 1;
 
-        cnt += mid / x + mid / y;
+        cnt += (mid / x) + (mid / y);
 
-        return cnt >= n;
+        return (cnt >= n);
     };
 
-    while (l + 1 < r)
+    while (l <= r)
     {
 
-        mid = l + (r - l) / 2;
-
+        mid = (l + r) / 2;
         if (ok(mid))
         {
-            r = mid;
+            ans = mid;
+            r = mid - 1;
         }
         else
         {
-            l = mid;
+            l = mid + 1;
         }
     }
-    cout << r << endl;
+    cout << ans << endl;
 
     return 0;
 }
