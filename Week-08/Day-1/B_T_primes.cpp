@@ -22,6 +22,35 @@ bool isPrime(ll n)
     return true;
 }
 
+map<int, bool> seive()
+{
+    vector<bool> isPrime(N, true);
+
+    for (int i = 2; i * 2 <= N; i++)
+    {
+        if (isPrime[i])
+        {
+
+            for (int j = i + i; j < N; j += i)
+            {
+                isPrime[j] = false;
+            }
+        }
+    }
+
+    map<int, bool> mp;
+
+    for (int i = 2; i <= N; i++)
+    {
+        if (isPrime[i])
+        {
+            mp[i] = true;
+        }
+    }
+
+    return mp;
+}
+
 bool isPerfectSquare(ll n)
 {
 
@@ -43,9 +72,11 @@ int main()
         cin >> arr[i];
     }
 
+    map<int, bool> mp = seive();
+
     for (int i = 0; i < n; i++)
     {
-        if (isPrime(sqrt(arr[i])) && isPerfectSquare(arr[i]))
+        if (mp[sqrt(arr[i])] && isPerfectSquare(arr[i]))
         {
             cout << "YES\n";
         }
